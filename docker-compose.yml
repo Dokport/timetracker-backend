@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  timetracker:
+    image: timetracker-backend:latest
+    build:
+      context: .
+    ports:
+      - "7080:7080"  # Map your desired port, replace 8080 with your desired external port
+    volumes:
+      - /volume1/docker/retainer:/app/data  # Map NAS folder to container data folder
+    environment:
+      - SQLALCHEMY_DATABASE_URI=sqlite:///app/data/timelogs.db  # Example environment variable
+    restart: unless-stopped
